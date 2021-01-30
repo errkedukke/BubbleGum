@@ -10,7 +10,6 @@ namespace BubbleGumApi.Controllers
     public class BubbleGumsController : ControllerBase
     {
         private BubbleGumContext _context;
-
         public BubbleGumsController(BubbleGumContext context)
         {
             _context = context;
