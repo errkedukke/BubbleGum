@@ -10,6 +10,7 @@ namespace BubbleGumApi.Models
     {
         // Options are coming from Startup.CS file
         // services.AddDbContext<BubbleGumContext>(options => options.UseInMemoryDatabase("gum-ball"));
+
         public BubbleGumContext(DbContextOptions<BubbleGumContext> options) : base(options)
         {
 
