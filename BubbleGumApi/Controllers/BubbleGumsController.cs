@@ -38,17 +38,19 @@ namespace BubbleGumApi.Controllers
         [HttpPost]
         public IActionResult PostBubbleGum([FromBody] BubbleGum bubbleGum)
         {
-            return Ok("Bubblegum Posted");
+            return NotFound("Not implemented");
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult PutBubbleGum(int id, [FromBody] string value)
         {
+            return NotFound("Not implemented");
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult DeleteBubbleGum(int id)
         {
+            return NotFound("Not implemented");
         }
     }
 }
