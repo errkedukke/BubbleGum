@@ -36,9 +36,12 @@ namespace BubbleGumApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostBubbleGum([FromBody] BubbleGum bubbleGum)
+        public async Task<IActionResult> PostBubbleGum([FromBody] BubbleGum bubbleGum)
         {
-            return NotFound("Not implemented");
+            _context.bubbleGums.Add(bubbleGum);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetBubbleGum", new { id = bubbleGum.Id }, bubbleGum);
         }
 
         [HttpPut("{id}")]
