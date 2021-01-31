@@ -55,9 +55,19 @@ namespace BubbleGumApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteBubbleGum(int id)
+        public async Task<ActionResult<BubbleGum>> DeleteBubbleGum(int id)
         {
-            return NotFound("Not implemented");
+            var bubbleGum = await _context.bubbleGums.FindAsync(id);
+
+            if (bubbleGum == null)
+            {
+                return NotFound();
+            }
+
+            _context.Remove(bubbleGum);
+            await _context.SaveChangesAsync();
+
+            return bubbleGum;
         }
     }
 }
