@@ -45,9 +45,13 @@ namespace BubbleGumApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult PutBubbleGum(int id, [FromBody] string value)
+        public async Task<IActionResult> PutBubbleGum(int id, [FromBody] BubbleGum bubbleGum)
         {
-            return NotFound("Not implemented");
+            _context.Entry(bubbleGum).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            //return NoContent();
+            return CreatedAtAction("GetBubbleGum", new { id = bubbleGum.Id }, bubbleGum);
         }
 
         [HttpDelete("{id}")]
