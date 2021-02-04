@@ -49,12 +49,29 @@ namespace BubbleGumApi.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> PutCategory([FromBody] Category category) 
+        public async Task<IActionResult> PutCategory([FromBody] Category category)
         {
             _context.Entry(category).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCategory", new { id = category.Id }, category);
         }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<Category>> DelteCategory(int id) 
+        {
+            var category = await _context.categories.FindAsync(id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            _context.Remove(category);
+            await _context.SaveChangesAsync();
+
+            return category;
+        }
+
     }
 }
