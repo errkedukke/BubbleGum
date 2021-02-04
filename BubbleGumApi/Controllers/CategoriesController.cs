@@ -39,6 +39,13 @@ namespace BubbleGumApi.Controllers
             return Ok(category);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> PostCategory([FromBody] Category category) 
+        {
+            _context.categories.Add(category);
+            await _context.SaveChangesAsync();
 
+            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
+        }
     }
 }
