@@ -25,5 +25,20 @@ namespace BubbleGumApi.Controllers
         {
             return Ok(await _context.categories.ToArrayAsync());
         }
+
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetCategory(int id)
+        {
+            var category = await _context.categories.FindAsync(id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(category);
+        }
+
+
     }
 }

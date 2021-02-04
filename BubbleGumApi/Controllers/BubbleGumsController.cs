@@ -44,17 +44,16 @@ namespace BubbleGumApi.Controllers
             return CreatedAtAction("GetBubbleGum", new { id = bubbleGum.Id }, bubbleGum);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> PutBubbleGum(int id, [FromBody] BubbleGum bubbleGum)
         {
             _context.Entry(bubbleGum).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            //return NoContent();
             return CreatedAtAction("GetBubbleGum", new { id = bubbleGum.Id }, bubbleGum);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<ActionResult<BubbleGum>> DeleteBubbleGum(int id)
         {
             var bubbleGum = await _context.bubbleGums.FindAsync(id);
