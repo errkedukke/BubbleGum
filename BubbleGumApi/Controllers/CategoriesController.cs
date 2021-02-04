@@ -40,9 +40,18 @@ namespace BubbleGumApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostCategory([FromBody] Category category) 
+        public async Task<IActionResult> PostCategory([FromBody] Category category)
         {
             _context.categories.Add(category);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> PutCategory([FromBody] Category category) 
+        {
+            _context.Entry(category).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCategory", new { id = category.Id }, category);
